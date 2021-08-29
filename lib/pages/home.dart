@@ -111,9 +111,6 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         color: data.contains(index) ? Colors.white : Colors.deepPurple,
                       ),
-                      Container(
-                        color: index.isOdd ? Colors.white : Colors.deepPurple,
-                      ),
                     ],
                   );
                 }),
