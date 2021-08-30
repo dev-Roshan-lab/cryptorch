@@ -100,20 +100,12 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               flex: 1,
-              child: GridView.count(
-                crossAxisCount: 5,
-                children: List.generate(5, (index) {
-                  List data = [1,2,3,5,9,11];
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        color: data.contains(index) ? Colors.white : Colors.deepPurple,
-                      ),
-                    ],
-                  );
-                }),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                color: Colors.deepPurple,
+                child: CustomPaint(
+                  painter: CurvePainter(),
+                ),
               ),
             ),
             Expanded(
@@ -126,5 +118,49 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+}
+
+class CurvePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = Colors.white;
+    paint.style = PaintingStyle.fill;
+
+    var shadowPaint = Paint();
+    shadowPaint.color = Colors.blueGrey;
+    shadowPaint.style = PaintingStyle.stroke;
+    shadowPaint.strokeWidth = 4;
+    shadowPaint.maskFilter = MaskFilter.blur(BlurStyle.normal, 5);
+
+
+    var path = Path();
+
+    path.moveTo(0, size.height * 0.9);
+    path.quadraticBezierTo(size.width * 0.25, size.height * 0.75,
+        size.width * 0.5, size.height * 0.9);
+    path.quadraticBezierTo(size.width * 0.75, size.height,
+        size.width * 1.0, size.height * 0.9);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+
+    var shadow = Path();
+    shadow.moveTo(0, size.height * 0.9);
+    shadow.quadraticBezierTo(size.width * 0.25, size.height * 0.75,
+        size.width * 0.5, size.height * 0.9);
+    shadow.quadraticBezierTo(size.width * 0.75, size.height,
+        size.width * 1.0, size.height * 0.9);
+    //shadow.lineTo(size.width, size.height);
+
+
+    canvas.drawPath(path, paint);
+    canvas.drawPath(shadow, shadowPaint);
+
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
   }
 }
