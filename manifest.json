@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Now predict future crypto-currency prices with Machine Learning, Time to leverage your apps by using Cryptorch API">",
+    "description": "Now predict future crypto-currency prices with Machine Learning, Time to leverage your apps by using Cryptorch API",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
