@@ -55,6 +55,7 @@ flutter:
     - assets/coin3.png
     - assets/coin4.png
     - assets/coin5.png
+    - assets/rapidapi.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

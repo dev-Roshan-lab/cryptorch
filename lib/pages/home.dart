@@ -21,100 +21,140 @@ class _HomePageState extends State<HomePage> {
           //TODO t and c
         ],
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        color: Colors.deepPurple,
-        child: Column(
-          children: [
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height*0.5,
-                      width: MediaQuery.of(context).size.width*0.3,
-                      child: StaggeredGridView.count(
-                        crossAxisCount: 4,
-                        children: List.generate(3, (index) => Center(
-                            child: Image.asset('assets/coin$index.png'),
-                          )),
-                        staggeredTiles: [
-                          StaggeredTile.count(2, 2), // takes up 2 rows and 2 columns space
-                          StaggeredTile.count(2, 1), // takes up 2 rows and 1 column
-                          StaggeredTile.count(1, 2), // takes up 1 row and 2 column space
-                        ], // scatter them randomly
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          color: Colors.deepPurple,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height*0.5,
+                        width: MediaQuery.of(context).size.width*0.3,
+                        child: StaggeredGridView.count(
+                          crossAxisCount: 4,
+                          children: List.generate(3, (index) => Center(
+                              child: Image.asset('assets/coin$index.png'),
+                            )),
+                          staggeredTiles: [
+                            StaggeredTile.count(2, 2), // takes up 2 rows and 2 columns space
+                            StaggeredTile.count(2, 1), // takes up 2 rows and 1 column
+                            StaggeredTile.count(1, 2), // takes up 1 row and 2 column space
+                          ], // scatter them randomly
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            maxRadius: 50,
-                            backgroundColor: Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Image.asset('assets/cpu.png'),
-                            )
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Sometimes\nCryptos Can\nBe Confusing.',
-                            style: GoogleFonts.spinnaker(
-                                textStyle: Theme.of(context).textTheme.headline4,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 40
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              maxRadius: 50,
+                              backgroundColor: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Image.asset('assets/cpu.png'),
+                              )
                             ),
-                            textAlign: TextAlign.center
-                          ),
-                        ],
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              'Sometimes\nCryptos Can\nBe Confusing.',
+                              style: GoogleFonts.spinnaker(
+                                  textStyle: Theme.of(context).textTheme.headline4,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40
+                              ),
+                              textAlign: TextAlign.center
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height*0.5,
-                      width: MediaQuery.of(context).size.width*0.3,
-                      child: StaggeredGridView.count(
-                        crossAxisCount: 4,
-                        children: List.generate(3, (index) => Center(
-                          child: Image.asset('assets/coin${3+index}.png'),
-                        )),
-                        staggeredTiles: [
-                          StaggeredTile.count(2, 1), // takes up 2 rows and 2 columns space
-                          StaggeredTile.count(2, 1), // takes up 2 rows and 1 column
-                          StaggeredTile.count(1, 2), // takes up 1 row and 2 column space
-                        ], // scatter them randomly
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height*0.5,
+                        width: MediaQuery.of(context).size.width*0.3,
+                        child: StaggeredGridView.count(
+                          crossAxisCount: 4,
+                          children: List.generate(3, (index) => Center(
+                            child: Image.asset('assets/coin${3+index}.png'),
+                          )),
+                          staggeredTiles: [
+                            StaggeredTile.count(2, 1), // takes up 2 rows and 2 columns space
+                            StaggeredTile.count(2, 1), // takes up 2 rows and 1 column
+                            StaggeredTile.count(1, 2), // takes up 1 row and 2 column space
+                          ], // scatter them randomly
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.deepPurple,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          print('launch url');
+                        },
+                        child: Container(
+                          width: 200,
+                          height: 70,
+                          child: Card(
+                            child: Image.asset('assets/rapidapi.png'),
+                            elevation: 40,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20,),
+                      Text(
+                        'Now predict future prices of crypto-currencies with great accuracy\n Cryptorch making crypto investments easier!',
+                        style: GoogleFonts.spinnaker(
+                            textStyle: Theme.of(context).textTheme.headline4,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25
+                        ),
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: 100,
                 width: MediaQuery.of(context).size.width,
-                color: Colors.deepPurple,
                 child: CustomPaint(
                   painter: CurvePainter(),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                color: Colors.white,
-              ),
-            )
-          ],
+              Expanded(
+                flex: 1,
+                child: Container(
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -151,7 +191,7 @@ class CurvePainter extends CustomPainter {
         size.width * 0.5, size.height * 0.9);
     shadow.quadraticBezierTo(size.width * 0.75, size.height,
         size.width * 1.0, size.height * 0.9);
-    //shadow.lineTo(size.width, size.height);
+
 
 
     canvas.drawPath(path, paint);
