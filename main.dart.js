@@ -33742,7 +33742,7 @@ q[6]=h+q[6]>>>0
 q[7]=g+q[7]>>>0}}
 V.a2N.prototype={}
 F.B3.prototype={
-S:function(a,b){return new S.rF(new Y.r3(null),"Flutter Demo",X.ac1(null,C.cw),null)}}
+S:function(a,b){return new S.rF(new Y.r3(null),"Cryptorch - Future crypto price prediction",X.ac1(null,C.cw),null)}}
 Y.r3.prototype={
 aN:function(){return new Y.GE(C.o)}}
 Y.GE.prototype={
