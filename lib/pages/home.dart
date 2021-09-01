@@ -165,18 +165,38 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          GestureDetector(
-                            onTap: () async {
-                              await canLaunch('https://rapidapi.com/dev.vividgoat/api/cryptorch/') ? await launch('https://rapidapi.com/dev.vividgoat/api/cryptorch/') : print('error');
-                            },
-                            child: Container(
-                              width: 200,
-                              height: 70,
-                              child: Card(
-                                child: Image.asset('assets/rapidapi.png'),
-                                elevation: 30,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () async {
+                                  await canLaunch('https://rapidapi.com/dev.vividgoat/api/cryptorch/') ? await launch('https://rapidapi.com/dev.vividgoat/api/cryptorch/') : print('error');
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width < 450 ? MediaQuery.of(context).size.width / 2- 20 : 200,
+                                  height: MediaQuery.of(context).size.width < 450 ? 50 : 70,
+                                  child: Card(
+                                    child: Image.asset('assets/rapidapi.png'),
+                                    elevation: 30,
+                                  ),
+                                ),
                               ),
-                            ),
+                              SizedBox(width: 20,),
+                              GestureDetector(
+                                onTap: () async {
+                                  await canLaunch('https://www.producthunt.com/posts/cryptorch-api') ? await launch('https://www.producthunt.com/posts/cryptorch-api') : print('error');
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width < 450 ? MediaQuery.of(context).size.width / 2 - 20 : 200,
+                                  height: MediaQuery.of(context).size.width < 450 ? 50 : 70,
+                                  child: Card(
+                                    child: Image.asset('assets/producthunt.png'),
+                                    elevation: 30,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(height: 20,),
                           Padding(

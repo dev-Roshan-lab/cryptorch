@@ -26,6 +26,7 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_staggered_grid_view: ^0.4.0
   url_launcher: any
+  plugin_platform_interface: ^2.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -57,6 +58,7 @@ flutter:
     - assets/coin4.png
     - assets/coin5.png
     - assets/rapidapi.png
+    - assets/producthunt.png
     - assets/right-arrow.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
