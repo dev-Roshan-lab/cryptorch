@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:ui' as ui;
-import 'dart:html';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
