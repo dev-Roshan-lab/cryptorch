@@ -94,5 +94,20 @@
       loadMainDartJs();
     }
   </script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyDuYYvuIIjAQgP5u9RzAT9MihOReX7g4Vs",
+      authDomain: "cryptorch-4e31e.firebaseapp.com",
+      projectId: "cryptorch-4e31e",
+      storageBucket: "cryptorch-4e31e.appspot.com",
+      messagingSenderId: "922970243737",
+      appId: "1:922970243737:web:dc20680126bfbe7a882e08",
+      measurementId: "G-FEN3EG4QSN"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
 </body>
 </html>

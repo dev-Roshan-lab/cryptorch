@@ -1,4 +1,5 @@
 import 'package:cryptorch/constants/constants.dart';
+import 'package:cryptorch/widgets/graph.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -402,23 +403,47 @@ class _HomePageState extends State<HomePage> {
                                   '''
                                  
                                   {
-                                    "data_x_actual" : "["DATE_1","DATE_2",....]",
-                                    "data_x_predicted" : "["DATE_1", "DATE_2",....]",
-                                    "data_y_actual" : "[PRICE_OF_COIN_DATE_1, PRICE_OF_COIN_DATE_2]",
-                                    "data_y_predicted" : "[PREDICTED_PRICE_OF_COIN_DATE_1, PREDICTED_PRICE_OF_COIN_DATE_2]"
+                                    "forecast" : "[[PREDICTION_1], [PREDICTION_2]]",
+                                    "timestamp" : "[[TIMESTAMP_1], [TIMESTAMP_2]]",
                                   }
                                   ''',
-                                  style: TextStyle(
+                                  style: GoogleFonts.spinnaker(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
                                   ),
                                 ),
                               ),
                             ),
                           ),
                           SizedBox(height: 20,),
+                          RichText(
+                            text: TextSpan(
+                              style: GoogleFonts.spinnaker(
+                                fontSize: 20,
+                                color: Colors.black
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'The API parameter '
+                                ),
+                                TextSpan(
+                                  text: 'history ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                  )
+                                ),
+                                TextSpan(
+                                  text: 'accepts integers. The final response consists of history+period, where history talks about the number of days in the past from the current date and period talks about the number of days in the future from the current date.'
+                                )
+                              ]
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Text(
-                            'The API returns 4 JSON pairs',
+                            'The API returns 2 JSON pairs',
                             style: GoogleFonts.spinnaker(
                                 textStyle: Theme.of(context).textTheme.headline2,
                                 fontWeight: FontWeight.bold,
@@ -441,8 +466,8 @@ class _HomePageState extends State<HomePage> {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: 'data_x_actual ',
-                                    style: TextStyle(
+                                    text: 'forecast ',
+                                    style: GoogleFonts.spinnaker(
                                       fontWeight: FontWeight.bold,
                                       fontStyle: FontStyle.italic,
                                         color: Colors.black,
@@ -450,8 +475,8 @@ class _HomePageState extends State<HomePage> {
                                     )
                                   ),
                                   TextSpan(
-                                    text: 'is a string that should be turned into a list and consists of Strings, it consists of the date',
-                                      style: TextStyle(
+                                    text: 'is a predicted output for the target crypto-currency for the corresponding timestamp',
+                                      style: GoogleFonts.spinnaker(
                                           color: Colors.black,
                                           fontSize: 20
                                       )
@@ -466,8 +491,8 @@ class _HomePageState extends State<HomePage> {
                               text: TextSpan(
                                   children: [
                                     TextSpan(
-                                        text: 'data_x_predicted ',
-                                        style: TextStyle(
+                                        text: 'timestamp ',
+                                        style: GoogleFonts.spinnaker(
                                             fontWeight: FontWeight.bold,
                                             fontStyle: FontStyle.italic,
                                             color: Colors.black,
@@ -475,61 +500,11 @@ class _HomePageState extends State<HomePage> {
                                         )
                                     ),
                                     TextSpan(
-                                      text: 'is a string that should be turned into a list and consists of Strings, it consists of the date. Same as above and exists for easiness.',
-                                        style: TextStyle(
+                                      text: 'is a timestamp that can be converted to a date or utilized as it is.',
+                                        style: GoogleFonts.spinnaker(
                                             color: Colors.black,
                                             fontSize: 20
                                         )
-                                    )
-                                  ]
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: RichText(
-                              text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                        text: 'data_y_actual ',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle: FontStyle.italic,
-                                            color: Colors.black,
-                                            fontSize: 20
-                                        )
-                                    ),
-                                    TextSpan(
-                                      text: 'is a string that should be turned into a list and consists of integers, it is made up of the real price of the requested cryptocurrency in USD.',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20
-                                        )
-                                    )
-                                  ]
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: RichText(
-                              text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                        text: 'data_y_predicted ',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle: FontStyle.italic,
-                                          color: Colors.black,
-                                          fontSize: 20
-                                        )
-                                    ),
-                                    TextSpan(
-                                      text: 'is a string that should be turned into a list and consists of integers, it is made up of the predcited price of the requested cryptocurrency in USD.',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20
-                                      )
                                     )
                                   ]
                               ),
@@ -552,8 +527,25 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(height: 20,),
+                          Card(
+                            elevation: 20,
+                            color: Colors.black,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '/api/v2?crypto=BTC&period=10&history=10',
+                                style: GoogleFonts.spinnaker(
+                                    textStyle: Theme.of(context).textTheme.headline2,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.white
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 20,),
                           Container(
-                            height: 400,
+                            height: 200,
                             width: MediaQuery.of(context).size.width,
                             child: Card(
                               elevation: 20,
@@ -564,15 +556,121 @@ class _HomePageState extends State<HomePage> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     response,
-                                    style: TextStyle(
+                                    style: GoogleFonts.spinnaker(
                                       color: Colors.white,
-                                      fontWeight: FontWeight.bold
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          )
+                          ),
+                          SizedBox(height: 20,),
+                          Text(
+                            'Example',
+                            style: GoogleFonts.spinnaker(
+                                textStyle: Theme.of(context).textTheme.headline2,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24
+                            ),
+                          ),
+                          Container(
+                            width: 120,
+                            child: Divider(
+                              color: Colors.yellow,
+                              thickness: 3,
+                            ),
+                          ),
+                          SizedBox(height: 20,),
+                          Card(
+                            elevation: 20,
+                            color: Colors.black,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 600,
+                                width: MediaQuery.of(context).size.width,
+                                color: Colors.black,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Container(
+                                          height: 400,
+                                          width: 800,
+                                          child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: graph(context)
+                                          )
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 50,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 20,
+                                                width: 20,
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(100),
+                                                    color: Colors.red
+                                                ),
+                                              ),
+                                              SizedBox(width: 10,),
+                                              Text(
+                                                'Past',
+                                                style: GoogleFonts.spinnaker(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(width: 20,),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 20,
+                                                width: 20,
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(100),
+                                                    color: Colors.green
+                                                ),
+                                              ),
+                                              SizedBox(width: 10,),
+                                              Text(
+                                                'Predicted',
+                                                style: GoogleFonts.spinnaker(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      'Predicted on 26 September 2021\n Hence Graph starts from 16 September and ends at October 5 2021',
+                                      style: GoogleFonts.spinnaker(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     )
@@ -580,7 +678,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+
             Container(
               height: 50,
               decoration: BoxDecoration(
