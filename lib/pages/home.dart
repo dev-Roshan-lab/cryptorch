@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,6 +15,258 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  bool _toogleMenu = false;
+  final email = TextEditingController();
+  final message = TextEditingController();
+  final name = TextEditingController();
+
+  String emailData = '';
+  String messageData = '';
+  String nameData = '';
+
+  Widget fabWidget(bool toggle) {
+    return toggle ? Card(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20)
+      ),
+      child: Container(
+        height: 400,
+        width: 300,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.deepPurple
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Send us a Message',
+                        style: GoogleFonts.spinnaker(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _toogleMenu = false;
+                          });
+                        }, icon: Icon(Icons.cancel),
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                )
+            ),
+            Expanded(
+              flex: 5,
+              child: Container(
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(20), bottomLeft: Radius.circular(20)),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Name',
+                        style: GoogleFonts.spinnaker(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      SizedBox(height: 10,),
+                      SizedBox(width: 300,child: TextField(
+                        controller: name,
+                        decoration: InputDecoration(
+                          suffixIcon: Transform.rotate(
+                            angle:3.92,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.add_circle,
+                                color: Colors.grey,
+                              ),
+                              onPressed: () {
+                                name.clear();
+                              },
+                            ),
+                          ),
+                          border: OutlineInputBorder(),
+                          labelText: 'Enter your name',
+                          labelStyle: TextStyle(
+                              color: Colors.black
+                          ),
+                          fillColor: Colors.black,
+                          focusedBorder:OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.black, width: 2.0),
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.grey, width: 2.0),
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                        ),
+                        onSubmitted: (tag) {
+                          print('--------------tag');
+                          print(tag);
+                          if (tag != '') {
+                            setState(() {
+                              nameData = tag;
+                            });
+                          }
+                        },
+                      ),),
+                      SizedBox(height: 10,),
+                      Text(
+                        'Email',
+                        style: GoogleFonts.spinnaker(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      SizedBox(height: 10,),
+                      SizedBox(width: 300,child: TextField(
+                        controller: email,
+                        decoration: InputDecoration(
+                          suffixIcon: Transform.rotate(
+                            angle:3.92,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.add_circle,
+                                color: Colors.grey,
+                              ),
+                              onPressed: () {
+                                email.clear();
+                              },
+                            ),
+                          ),
+                          border: OutlineInputBorder(),
+                          labelText: 'Enter your email',
+                          labelStyle: TextStyle(
+                              color: Colors.black
+                          ),
+                          fillColor: Colors.black,
+                          focusedBorder:OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.black, width: 2.0),
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.grey, width: 2.0),
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                        ),
+                        onSubmitted: (tag) {
+                          print('--------------tag');
+                          print(tag);
+                          if (tag != '') {
+                            setState(() {
+                              emailData = tag;
+                            });
+                          }
+                        },
+                      ),),
+                      Text(
+                        'Message',
+                        style: GoogleFonts.spinnaker(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      SizedBox(height: 10,),
+                      SizedBox(width: 300,child: TextField(
+                        controller: message,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          suffixIcon: Transform.rotate(
+                            angle:3.92,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.add_circle,
+                                color: Colors.grey,
+                              ),
+                              onPressed: () {
+                                message.clear();
+                              },
+                            ),
+                          ),
+                          border: OutlineInputBorder(),
+                          labelText: 'Your message',
+                          labelStyle: TextStyle(
+                              color: Colors.black
+                          ),
+                          fillColor: Colors.black,
+                          focusedBorder:OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.black, width: 2.0),
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.grey, width: 2.0),
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                        ),
+                        onSubmitted: (tag) {
+                          print('--------------tag');
+                          print(tag);
+                          if (tag != '') {
+                            setState(() {
+                              messageData = tag;
+                            });
+                          }
+                        },
+                      ),),
+                      SizedBox(height: 10,),
+                      TextButton(
+                        child: Text('Send'),
+                        onPressed: () async {
+                          CollectionReference messages = FirebaseFirestore.instance.collection('users');
+                          await messages.add({
+                            'name':name.text,
+                            'email':email.text,
+                            'message':message.text,
+                            'date-time':DateTime.now().toString()
+                          // ignore: invalid_return_type_for_catch_error
+                          }).then((value) => null).catchError((e) => print('Error $e'));
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            )
+
+          ],
+        ),
+      ),
+    ) : FloatingActionButton(
+      child: Icon(Icons.chat_bubble_outline, color: Colors.white,),
+      foregroundColor: Colors.deepPurple,
+      onPressed: () {
+        setState(() {
+          _toogleMenu = true;
+        });
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -753,6 +1006,11 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      floatingActionButton: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 1000),
+        child: fabWidget(_toogleMenu),
+        transitionBuilder: (Widget child, Animation<double> animation) => FadeTransition(child: child, opacity: animation),
+      )
     );
   }
 }
